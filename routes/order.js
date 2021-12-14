@@ -20,17 +20,17 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //set trade cancel 
-router.post("/cancel-trade/:order_id", async (req, res) => {
+router.post("/cancel-trade/:order_id",  (req, res) => {
    try {
-    const getOrder = await Order.findOne({
+    const getOrder =  Order.findOne({
       _id:{$in:req.params.order_id}
     });
      var counter = 0;
      getOrder.forEach(element => {
-       const salesProduct = await 
+       const salesProduct =  
        Order.findOne({_id:{$in:element[i].products.productId}});
        salesProduct.unitsInStock += element[i].products.quantity;
-       const updateProduct = await Product.findByIdAndUpdate(
+       const  updateProduct =  Product.findByIdAndUpdate(
          salesProduct.productId,
          {$set: salesProduct},
          {new:true}
@@ -38,7 +38,7 @@ router.post("/cancel-trade/:order_id", async (req, res) => {
        counter++;
      });
      getOrder.status = "cancel";
-     const changeStatus = await Order.findByIdAndUpdate(
+     const changeStatus =  Order.findByIdAndUpdate(
        getOrder._id,
        {$set:getOrder},
        {new:true}
@@ -50,17 +50,17 @@ router.post("/cancel-trade/:order_id", async (req, res) => {
 });
 
 //accept order 
-router.post("/accept-order/:order_id", async (req, res) => {
+router.post("/accept-order/:order_id",  (req, res) => {
    try {
-     const getOrder = await Order.findOne({
+     const getOrder =  Order.findOne({
        _id:{$in:req.params.order_id}
      });
       var counter = 0;
       getOrder.forEach(element => {
-        const salesProduct = await 
+        const salesProduct =  
         Order.findOne({_id:{$in:element[i].products.productId}});
         salesProduct.unitsInStock -= element[i].products.quantity;
-        const updateProduct = await Product.findByIdAndUpdate(
+        const updateProduct =  Product.findByIdAndUpdate(
           salesProduct.productId,
           {$set: salesProduct},
           {new:true}
@@ -68,7 +68,7 @@ router.post("/accept-order/:order_id", async (req, res) => {
         counter++;
       });
       getOrder.status = "accept";
-      const changeStatus = await Order.findByIdAndUpdate(
+      const changeStatus =  Order.findByIdAndUpdate(
         getOrder._id,
         {$set:getOrder},
         {new:true}

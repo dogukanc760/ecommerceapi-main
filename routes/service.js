@@ -45,7 +45,7 @@ router.get("/", async (req, res)=>{
        res.status(500).json(error);
    }
 });
-
+//naber
 router.get("/:id", async (req, res)=>{
    try {
        const services = await Service.findOne({_id:req.params.id});

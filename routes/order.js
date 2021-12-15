@@ -8,7 +8,7 @@ const Order = require("../models/Order");
 const Product = require("../models/Product");
 
 //create
-router.post("/", verifyToken, async (req, res) => {
+router.post("/",  async (req, res) => {
   const newOrder = new Order(req.body);
 
   try {
@@ -90,7 +90,7 @@ router.post("/decline-order/:order_id", async (req, res)=>{
 }); 
 
 //user update
-router.put("/:id", verifyTokenAndadmin, async (req, res) => {
+router.put("/:id",  async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
@@ -107,7 +107,7 @@ router.put("/:id", verifyTokenAndadmin, async (req, res) => {
 
 //user delete
 
-router.delete("/:id", verifyTokenAndadmin, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
     res.status(200).json("Order has been deleted");
@@ -117,7 +117,7 @@ router.delete("/:id", verifyTokenAndadmin, async (req, res) => {
 });
 
 //get user orders
-router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/find/:userId",  async (req, res) => {
   try {
     const orders = await Order.findOne({ userId: req.params.userId });
 
@@ -128,7 +128,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //get all users
-router.get("/", verifyTokenAndadmin, async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).json(orders);

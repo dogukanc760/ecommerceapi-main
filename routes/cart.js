@@ -8,7 +8,7 @@ const Cart = require("../models/Cart");
 
 
 //create 
-router.post("/", verifyToken, async (req, res)=>{
+router.post("/",  async (req, res)=>{
    const newCart = new Cart(req.body);
 
    try {
@@ -21,7 +21,7 @@ router.post("/", verifyToken, async (req, res)=>{
 
 
 //user update
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:id",  async (req, res) => {
   
   try {
     const updatedCart = await Cart.findByIdAndUpdate(
@@ -39,7 +39,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 //user delete
 
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     await Cart.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted");
@@ -49,7 +49,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //get user
-router.get("/find/:userId", verifyTokenAndAuthorization,async (req, res) => {
+router.get("/find/:userId", async (req, res) => {
   try {
     const cart = await Cart.findOne({userId: req.params.userId});
     
@@ -60,7 +60,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization,async (req, res) => {
 });
 
 //get all users
-router.get("/", verifyTokenAndadmin, async (req, res)=>{
+router.get("/",  async (req, res)=>{
     try {
         const carts = await Cart.find();
         res.status(200).json(carts);

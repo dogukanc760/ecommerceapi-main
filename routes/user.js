@@ -7,7 +7,7 @@ const {
 const User = require("../models/User");
 
 //user update
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:id",  async (req, res) => {
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
@@ -31,7 +31,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 //user delete
 
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
     res.status(200).json("User has been deleted");
@@ -41,7 +41,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //get user
-router.get("/find/:id", verifyTokenAndadmin, async (req, res) => {
+router.get("/find/:id",  async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { password, ...others } = user._doc;
@@ -52,7 +52,7 @@ router.get("/find/:id", verifyTokenAndadmin, async (req, res) => {
 });
 
 //get all users
-router.get("/", verifyTokenAndadmin, async (req, res) => {
+router.get("/",  async (req, res) => {
   const query = req.query.new;
   try {
     const users = query
@@ -67,7 +67,7 @@ router.get("/", verifyTokenAndadmin, async (req, res) => {
 
 //get user stats
 
-router.get("/stats", verifyTokenAndadmin, async (req, res)=>{
+router.get("/stats",  async (req, res)=>{
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear()-1));
 

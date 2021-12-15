@@ -8,7 +8,7 @@ const Product = require("../models/Product");
 
 
 //create 
-router.post("/", verifyTokenAndadmin, async (req, res)=>{
+router.post("/",  async (req, res)=>{
    const newProduct = new Product(req.body);
 
    try {
@@ -33,7 +33,7 @@ router.get("/get-by-barcode/:barcode", async (req, res)=>{
 
 
 //user update
-router.put("/:id", verifyTokenAndadmin, async (req, res) => {
+router.put("/:id",  async (req, res) => {
   
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
@@ -51,7 +51,7 @@ router.put("/:id", verifyTokenAndadmin, async (req, res) => {
 
 //user delete
 
-router.delete("/:id", verifyTokenAndadmin, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted");

@@ -9,6 +9,7 @@ const orderRoute = require("./routes/order");
 const cartRoute = require("./routes/cart");
 const staffRoute = require("./routes/staff");
 const serviceRoute = require("./routes/service");
+const uploadRoute = require("./routes/uploadimage");
 var cors = require("cors");
 
 dotenv.config();
@@ -22,6 +23,7 @@ mongoose
   app.use(cors());
   app.use(express.json());
   app.options('*', cors());
+  app.use("/api/uploadImage", uploadRoute);
   app.use("/api/product", productRoute);
  app.use("/api/user", userRoute);
  app.use("/api/auth", authRoute);

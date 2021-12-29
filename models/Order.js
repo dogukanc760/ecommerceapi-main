@@ -15,6 +15,8 @@ const OrderSchema = new mongoose.Schema(
                 },
             }
         ],
+        phoneNumber:{type:String, default:null},
+        fullName:{type:String, default:null},
         amount:{type:Number, required:true},
         address:{type:Object, required:true},
         status:{type:String, default:"pending"},

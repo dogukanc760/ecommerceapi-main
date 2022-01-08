@@ -4,6 +4,7 @@ const {
   verifyTokenAndAuthorization,
   verifyTokenAndadmin,
 } = require("./verifytoken");
+const CryptoJS = require("crypto-js");
 const User = require("../models/User");
 
 //user update
